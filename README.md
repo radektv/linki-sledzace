@@ -52,7 +52,7 @@ Projekt przydaje się w kontekście analizy linków w dużych zbiorach danych, n
 ## Wymagania
 
 - Python 3.x
-- Biblioteka `requests`
+- Biblioteka `requests` oraz `re`
 
 ## Instalacja
 

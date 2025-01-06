@@ -15,6 +15,7 @@ Plik 1)
 6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/
 7. AsINT Collection: https://lnkd.in/dCRNqptZ
 8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8
+```
 
 i dostajesz wynik:
 ```bash
@@ -26,6 +27,7 @@ i dostajesz wynik:
 6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/ -> https://rr.reuser.biz/
 7. AsINT Collection: https://lnkd.in/dCRNqptZ -> https://start.me/p/b5Aow7/asint_collection
 8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8 -> https://achirou.com/category/osint/
+```
 
 Plik 2) skrypt `resolve_links.py`
 

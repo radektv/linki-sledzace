@@ -2,6 +2,36 @@
 
 Projekt służy do rozwiązywania i analizowania linków zawartych w plikach tekstowych, automatycznie sprawdzając, do jakich stron internetowych prowadzą. Skrypt pobiera plik z linkami, rozwiązuje je i zapisuje wynik do nowego pliku.
 
+Potrzebujesz 2 plików:
+
+Plik 1)
+`linki-sledzace.txt` - tutaj wrzucasz swoje linki (nawet z tekstem) np:
+```bash
+1. MetaOSINT: https://lnkd.in/dhX755tY
+2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk
+3. OSINT Framework: https://lnkd.in/dUyVYSZz
+4. Nixintel Collection: https://lnkd.in/dnUcNnpW
+5. Cyber Detective’s Collection: https://lnkd.in/daEi-9MX
+6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/
+7. AsINT Collection: https://lnkd.in/dCRNqptZ
+8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8
+
+i dostajesz wynik:
+```bash
+1. MetaOSINT: https://lnkd.in/dhX755tY -> https://metaosint.github.io/
+2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk -> https://bellingcat.gitbook.io/toolkit
+3. OSINT Framework: https://lnkd.in/dUyVYSZz -> https://osintframework.com/
+4. Nixintel Collection: https://lnkd.in/dnUcNnpW -> https://start.me/p/rx6Qj8/nixintel-s-osint-resource-list
+5. Cyber Detective’s Collection: https://lnkd.in/daEi-9MX -> https://github.com/cipher387/osint_stuff_tool_collection
+6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/ -> https://rr.reuser.biz/
+7. AsINT Collection: https://lnkd.in/dCRNqptZ -> https://start.me/p/b5Aow7/asint_collection
+8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8 -> https://achirou.com/category/osint/
+
+Plik 2) skrypt `resolve_links.py`
+
+Plik 3) - wygenerowany automatycznie plik po użyciu komendy `python3 resolve_links.py`
+`wyniki-linki-sledzace.txt` 
+
 ## Spis treści
 
 - [Opis](#opis)

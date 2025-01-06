@@ -28,12 +28,15 @@ Aby zainstalować wymagane zależności, uruchom poniższe polecenie:
 
 1. **Zainstaluj Git** (jeśli jeszcze tego nie zrobiłeś):
 
-`sudo apt install git`
-`git clone https://github.com/radektv/linki-sledzace.git`
-`cd linki-sledzace`
+   `sudo apt install git`
+
+   `git clone https://github.com/radektv/linki-sledzace.git`
+
+   `cd linki-sledzace`
 
 2. **Zainstaluj wymagane biblioteki**
-   pip install requests
+   
+   `pip install requests`
 
 
 ## Użycie

@@ -1,38 +1,6 @@
-# Projekt: Linki Sledzace
+# Projekt: Linki Śledzące
 
-Projekt służy do rozwiązywania i analizowania linków zawartych w plikach tekstowych, automatycznie sprawdzając, do jakich stron internetowych prowadzą. Skrypt pobiera plik z linkami, rozwiązuje je i zapisuje wynik do nowego pliku.
-
-Potrzebujesz 2 plików:
-
-Plik 1)
-`linki-sledzace.txt` - tutaj wrzucasz swoje linki (nawet z tekstem) np:
-```bash
-1. MetaOSINT: https://lnkd.in/dhX755tY
-2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk
-3. OSINT Framework: https://lnkd.in/dUyVYSZz
-4. Nixintel Collection: https://lnkd.in/dnUcNnpW
-5. Cyber Detective’s Collection: https://lnkd.in/daEi-9MX
-6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/
-7. AsINT Collection: https://lnkd.in/dCRNqptZ
-8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8
-```
-
-i dostajesz wynik:
-```bash
-1. MetaOSINT: https://lnkd.in/dhX755tY -> https://metaosint.github.io/
-2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk -> https://bellingcat.gitbook.io/toolkit
-3. OSINT Framework: https://lnkd.in/dUyVYSZz -> https://osintframework.com/
-4. Nixintel Collection: https://lnkd.in/dnUcNnpW -> https://start.me/p/rx6Qj8/nixintel-s-osint-resource-list
-5. Cyber Detective’s Collection: https://lnkd.in/daEi-9MX -> https://github.com/cipher387/osint_stuff_tool_collection
-6. Arno Reuser’s OSINT Repertorium: https://rr.reuser.biz/ -> https://rr.reuser.biz/
-7. AsINT Collection: https://lnkd.in/dCRNqptZ -> https://start.me/p/b5Aow7/asint_collection
-8. Achirou OSINT Tools: https://lnkd.in/dK5ZJQD8 -> https://achirou.com/category/osint/
-```
-
-Plik 2) skrypt `resolve_links.py`
-
-Plik 3) - wygenerowany automatycznie plik po użyciu komendy `python3 resolve_links.py`
-`wyniki-linki-sledzace.txt` 
+Projekt służy do rozwiązywania i analizowania linków zawartych w plikach tekstowych, automatycznie sprawdzając, do jakich stron internetowych prowadżą. Skrypt przetwarza plik wejściowy, rozwiązuje linki (w tym obsługuje przekierowania) i zapisuje wynik do nowego pliku z adnotacjami.
 
 ## Spis treści
 
@@ -40,49 +8,111 @@ Plik 3) - wygenerowany automatycznie plik po użyciu komendy `python3 resolve_li
 - [Wymagania](#wymagania)
 - [Instalacja](#instalacja)
 - [Użycie](#użycie)
+- [Zaawansowane funkcje](#zaawansowane-funkcje)
 - [Contributing](#contributing)
 - [Licencja](#licencja)
 
+---
+
 ## Opis
 
-Skrypt w Pythonie umożliwia automatyczne pobieranie i analizowanie linków zawartych w pliku tekstowym. Dla każdego linku skrypt wykonuje zapytanie HTTP, sprawdzając, do jakiej strony prowadzi. Rozwiązane linki są zapisywane w nowym pliku tekstowym, który zawiera zarówno oryginalny tekst, jak i rozwiązane adresy URL.
+Skrypt w Pythonie umożliwia:
+1. Pobieranie i analizowanie linków zawartych w pliku tekstowym.
+2. Obsługę linków z przekierowaniami, np. `https://lnkd.in/...`.
+3. Zapisanie wyników w pliku wyjściowym:
+   - Rozwiązane linki (z pełnym adresem URL).
+   - Linki nierozwiązane z adnotacją `Nierozwiązane`.
+   - Linie bez URL z adnotacją `Brak URL`.
 
-Projekt przydaje się w kontekście analizy linków w dużych zbiorach danych, np. w przypadku zbierania materiałów do analiz OSINT.
+Skrypt obsługuje dużą liczbę linków, co czyni go przydatnym w analizach OSINT i pracy z dużymi zbiorami danych.
+
+---
 
 ## Wymagania
 
+Do uruchomienia projektu potrzebujesz:
 - Python 3.x
-- Biblioteka `requests` oraz `re`
+- Biblioteki Python:
+  - `requests`
+  - `urllib3`
+  - `re`
+  - `logging`
+
+---
 
 ## Instalacja
 
-Aby zainstalować wymagane zależności, uruchom poniższe polecenie:
+1. **Klonowanie repozytorium**  
+   Pobierz projekt z GitHub:
 
-1. **Zainstaluj Git** (jeśli jeszcze tego nie zrobiłeś):
+   ```bash
+   git clone https://github.com/radektv/linki-sledzace.git
+   cd linki-sledzace
+   ```
 
-   `sudo apt install git`
+2. **Instalacja zależności**  
+   Wykonaj poniższe polecenie w terminalu, aby zainstalować wymagane biblioteki:
 
-   `git clone https://github.com/radektv/linki-sledzace.git`
+   ```bash
+   pip install requests
+   ```
 
-   `cd linki-sledzace`
+3. **Przygotowanie plików**  
+   - Utwórz plik `linki-sledzace.txt` z linkami do analizy.
+   - Opcjonalnie możesz przygotować plik `proxy-free.txt` z adresami proxy w formacie:
+     ```plaintext
+     proxy1:port
+     proxy2:port
+     ```
 
-2. **Zainstaluj wymagane biblioteki**
-   
-   `pip install requests`
-
+---
 
 ## Użycie
 
-Aby użyć skryptu, wystarczy uruchomić go w terminalu:
+1. **Przygotowanie pliku wejściowego**  
+   W pliku `linki-sledzace.txt` umieść linki (mogą być wplecione w tekst). Przykład:
 
-Przygotuj plik wejściowy linki-sledzace.txt z linkami do rozwiązania.
+   ```plaintext
+   1. MetaOSINT: https://lnkd.in/dhX755tY
+   2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk
+   3. OSINT Framework: https://lnkd.in/dUyVYSZz
+   ```
 
-Uruchom skrypt:
+2. **Uruchomienie skryptu**  
+   Aby uruchomić skrypt, wykonaj w terminalu:
 
-`python3 resolve_links.py`
+   ```bash
+   python3 resolve_links.py
+   ```
 
-Skrypt utworzy plik wynikowy wyniki-linki-sledzace.txt z rozwiązanymi linkami.
+3. **Wynik**  
+   Skrypt utworzy plik `wyniki-linki-sledzace.txt` z rozwiązanymi linkami w formacie:
 
+   ```plaintext
+   1. MetaOSINT: https://lnkd.in/dhX755tY -> https://metaosint.github.io/
+   2. Bellingcat’s Online Toolkit: https://lnkd.in/e6Q3w5Fk -> https://bellingcat.gitbook.io/toolkit
+   3. OSINT Framework: https://lnkd.in/dUyVYSZz -> https://osintframework.com/
+   ```
+
+   Linie bez rozwiązanego linku zostaną oznaczone jako `Nierozwiązane`.
+
+---
+
+## Zaawansowane funkcje
+
+- **Obsługa proxy**  
+  Jeśli plik `proxy-free.txt` zawiera adresy proxy, skrypt automatycznie wykorzysta je w przypadku problemów z połączeniem.
+  
+- **Logi**  
+  Wszystkie błędy i zdarzenia są zapisywane w pliku `url_resolver.log`. Przydatne przy debugowaniu.
+
+- **Losowe User-Agenty**  
+  Skrypt korzysta z dynamicznych User-Agentów, co pozwala ominąć blokady serwerów chroniących się przed automatycznym ruchem.
+
+- **Obsługa przekierowań**  
+  Skrypt automatycznie śledzi przekierowania HTTP, zapisując ostateczny adres URL.
+
+---
 
 ## Contributing
 
@@ -93,6 +123,9 @@ Jeśli chcesz przyczynić się do rozwoju tego projektu, prosimy o utworzenie pu
 3. Zrób zmiany w kodzie.
 4. Prześlij pull request.
 
+---
+
 ## Licencja
 
 Ten projekt jest licencjonowany na podstawie **MIT License.**
+
